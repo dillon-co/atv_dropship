@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources :sub_categories
   resources :categories
   resources :inventories
-  resources :products
   resources :vehicles
   root to: 'visitors#index'
 
