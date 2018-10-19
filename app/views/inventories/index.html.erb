@@ -1,0 +1,30 @@
+      <div class="container">
+
+      <div class="">
+        <div class="container">
+          <% if @snow_plows.class == Hash %>
+          <div class="row">
+            <% @snow_plows.keys.each do |n| %>
+              <div class="col-lg-4">
+                <%= link_to inventory_path(@snow_plows[n][:ids].first) do %>
+                  <%= image_tag "#{@snow_plows[n][:picture]}" %>
+                  <h6> <%= n %> </h6>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <% else %>
+          <div class="row">
+            <% @snow_plows.each do |plow| %>
+                <div class="col-lg-4">
+                  <%= link_to inventory_path(plow) do %>
+                    <%= image_tag "#{plow.picture}", size:'200' %>
+                    <h6> <%= plow.name %> </h6>
+                  <% end %>
+                </div>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>

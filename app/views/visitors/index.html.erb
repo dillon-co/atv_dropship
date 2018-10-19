@@ -1,6 +1,153 @@
-<!-- <h3>Welcome</h3>
-<p><%#= link_to 'Users:', users_path %> <%#= User.count %> registered</p> -->
+<div id="all">
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="main-slider" class="">
+          <div class="item">
+             <%= image_tag "action-adventure-alpine-804570.jpg", size:"700x", class:"img-fluid" %>
 
-<h1>Sup, Fucker.</h1>
-<br>
-<h3>Get Me Those Assets</h3>
+          </div>
+        </div>
+        <!-- /#main-slider-->
+      </div>
+    </div>
+  </div>
+  <!--
+  *** ADVANTAGES HOMEPAGE ***
+  _________________________________________________________
+  -->
+  <div id="advantages">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100">
+            <div class="icon"><i class="fa fa-heart"></i></div>
+            <h3><a href="inventories">Snow Plow Blow Out!</a></h3>
+            <p class="mb-0">Get ready for snow season with trusted Tusk Snow Plows</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100">
+            <div class="icon"><i class="fa fa-tags"></i></div>
+            <h3><a href="#">Satisfaction Guarenteed</a></h3>
+            <p class="mb-0">Coor's on a sunday? Same.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100">
+            <div class="icon"><i class="fa fa-thumbs-up"></i></div>
+            <h3><a href="#">Send It!</a></h3>
+            <p class="mb-0">Our clothing item of the month is this killer "Send It!" Tee Shirt</p>
+          </div>
+        </div>
+      </div>
+      <!-- /.row-->
+    </div>
+    <!-- /.container-->
+  </div>
+  <!-- /#advantages-->
+  <!-- *** ADVANTAGES END ***-->
+  <!--
+  *** HOT PRODUCT SLIDESHOW ***
+  _________________________________________________________
+  -->
+  <div id="hot">
+    <div class="box py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="mb-0">Hot this week</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-md-12">
+        <div id="blog-homepage" class="row">
+          <div class="col-sm-6">
+            <div class="post">
+              <h4><a href="post.html">Snow Plow Blow Out</a></h4>
+              <p class="author-category"> <%= link_to "Winter is coming, get ready", inventories_path %> </p>
+              <hr>
+              <!-- <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p> -->
+              <%= image_tag @snow_plows.first.picture %>
+              <p class="read-more"><a href="inventories" class="btn btn-primary">Check It Out</a></p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="post">
+              <h4><a href="post.html">Send It Tee</a></h4>
+              <p class="author-category"><%= link_to "Because You're The Type To...", inventories_path %></p>
+              <hr>
+              <%= image_tag @shirts.first.picture %>
+              <!-- <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p> -->
+              <p class="read-more"><a href="inventories" class="btn btn-primary">Ceck It Out</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- /#blog-homepage-->
+      </div>
+    </div>
+  <!--
+  *** GET INSPIRED ***
+  _________________________________________________________
+  -->
+  <div class="container">
+    <div class="col-md-12">
+      <div class="box slideshow">
+        <h3>Send It</h3>
+        <p>Just as a casual reminder, Here's some photos.</p>
+        <div id="get-inspired" class="row owl-theme">
+          <div class="col-md-4"><a href="#"><%= image_tag "Quad-Bikes-for-sale.jpg", class: 'img-fluid', size:'300x199'%></a></div>
+          <div class="col-md-4"><a href="#"><%= image_tag "start.jpg", class: 'img-fluid', size:'300x250', style: 'height:225' %></a></div>
+          <div class="col-md-4"><a href="#"><%= image_tag "2017-ducati-multistrada-1200-enduro-1620x1080.jpg", class: 'img-fluid', size:'300x225' %></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- *** GET INSPIRED END ***-->
+  <!--
+  *** BLOG HOMEPAGE ***
+  _________________________________________________________
+  -->
+  <div class="box text-center">
+    <div class="container">
+      <div class="col-md-12">
+        <h3 class="text-uppercase">Here For A Good Time, Not A Long Time.</h3>
+        <p class="lead mb-0"> <%= link_to "About Us", about_path %> </p>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="container">
+    <div class="col-md-12">
+      <div id="blog-homepage" class="row">
+        <div class="col-sm-6">
+          <div class="post">
+            <h4><a href="post.html">Fashion now</a></h4>
+            <p class="author-category">By <a href="#">John Slim</a> in <a href="">Fashion and style</a></p>
+            <hr>
+            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+            <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a></p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="post">
+            <h4><a href="post.html">Who is who - example blog post</a></h4>
+            <p class="author-category">By <a href="#">John Slim</a> in <a href="">About Minimal</a></p>
+            <hr>
+            <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+            <p class="read-more"><a href="post.html" class="btn btn-primary">Continue reading</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- /.container-->
+  <!-- *** BLOG HOMEPAGE END ***-->
+</div>
+</div>
+<!--
+*** FOOTER ***
+_________________________________________________________
+-->

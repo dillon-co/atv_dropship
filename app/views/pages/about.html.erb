@@ -1,7 +1,40 @@
-<% content_for :title do %>About<% end %>
-<h3>About the Website</h3>
-<p>
-This web application was created with
-<%= link_to('Rails Composer', 'http://railsapps.github.io/rails-composer/') %>
-from the <%= link_to('RailsApps project', 'http://railsapps.github.io/') %>.
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-7">
+
+      <div class="modal-header">
+        <h3 class="modal-title">"The world is mud-luscious and puddle wonderful."</h3><br>
+      </div>
+      <div class="modal-body">
+
+        <h5>It's better to have a Suzuki Quad than a fancy rug <br><br>
+           And we'll trade escargot for a car in the mud<br><br><br><br>
+           Any day<br><br><br><br>
+           Here for a good time, not a long time <br><br>
+           We like playing in the dirt and grime <br><br><br><br>
+           And it's fine if you like tea and crumpets <br><br>
+           We like playing in trees with no cumpass <br><br><br><br>
+           So if you like to ride dirt bikes and rock climb <br><br>
+           We like to kick it with your kind<br><br><br><br>
+           Any day <br><br><br><br>
+           So you can call us buds<br><br>
+           Here's a beer. Chug.
+         </h5>
+         <br><br><br><br>
+         <h1>New Products Added Regularly</h1>
+         <%= link_to "See Current Deals", inventories_path, class:'btn btn-primary' %>
+
+      </div>
+    </div>
+    <div class="col-lg-5">
+        <%#= image_tag "action-bike-rider-biker-1135192.jpg", class:'img-fluid' %>
+        <%#= image_tag "action-competition-daytime-1135190.jpg", class:'img-fluid' %>
+        <%= image_tag "background-biker-blur-1161996.jpg", class:'img-fluid' %>
+        <%= image_tag "backlit-bright-dawn-697243.jpg", class:'img-fluid' %>
+        <%= image_tag "america-army-basic-training-33620.jpg", class:'img-fluid' %>
+        <%#= image_tag "beautiful-beauty-blond-hair-1460427.jpg", class:'img-fluid' %>
+        <%#= image_tag "bond-bonding-daylight-1187086.jpg", class:'img-fluid' %>
+
+    </div>
+  </div>
+</div>

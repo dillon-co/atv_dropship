@@ -1,0 +1,4 @@
+ <%#= @prod.picture %>
+<%= image_tag @prod.picture %>
+<span>Amount: $<%= @prod.msrp %></span>
+<%= link_to "Order Now", new_order_path(prodno: @prod.prodno ), class: 'btn btn-danger'%>

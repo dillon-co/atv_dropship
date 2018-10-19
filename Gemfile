@@ -12,6 +12,19 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'annotate'
+gem 'postgres-copy'
+gem 'activerecord-import'
+gem 'mechanize'
+gem 'stripe'
+gem 'redis'
+gem 'sidekiq'
+gem "sidekiq-cron", "~> 0.4.0"
+gem 'sinatra', :require => nil
+gem 'redis-rails'
+gem 'rails_12factor', group: :production
+gem 'annotate'
+gem 'watir'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
@@ -28,6 +41,7 @@ gem 'high_voltage'
 gem 'pg', '~> 0.18'
 group :development do
   gem 'better_errors'
+  gem "binding_of_caller"
   gem 'rails_layout'
   gem 'spring-commands-rspec'
 end

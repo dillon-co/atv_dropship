@@ -1,0 +1,21 @@
+<div class="container">
+
+  <%= form_for Order.new do |f|%>
+    <%= f.label "Name" %>
+    <%= f.text_field :user_name %>
+    <br>
+    <%= f.label "Street Address " %>
+    <%= f.text_field :street_address %>
+    <br>
+    <%= f.label "City" %>
+    <%= f.text_field :city %>
+    <%= f.label "State" %>
+    <%= f.text_field :state %>
+    <br>
+    <%= f.label "Zip" %>
+    <%= f.text_field :zip %>
+    <br>
+    <%= f.submit "Continue", class: 'btn btn-primary' %>
+
+  <% end %>
+</div>

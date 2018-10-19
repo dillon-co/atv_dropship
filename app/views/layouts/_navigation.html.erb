@@ -1,6 +1,6 @@
-<%# navigation styled for Bootstrap 4.0 %>
-<div class="container">
-  <nav class="navbar navbar-dark bg-inverse">
+<!-- <%# navigation styled for Bootstrap 4.0 %>
+<div class="">
+  <nav class="navbar navbar-dark bg-dark">
     <ul class="nav navbar-nav clearfix">
       <li class="nav-item">
         <button class="navbar-toggler hidden-sm-up nav-link" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,4 +16,91 @@
       </ul>
     </div>
   </nav>
+</div> -->
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <a class="navbar-brand" href="#">
+     <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "clear\ background\ cc1.png", size: "140" %>
+     <% end %>
+   </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <%= render 'layouts/navigation_links' %>
+      <%= render 'layouts/nav_links_for_auth' %>
+        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Cart: <%#= session[:cart].count %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">ATV</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Dirt Bike</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">UTV</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">ADV/DualSport</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Street</a>
+        </div>
+      </li> -->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+    </form>
+  </div>
+
+  <div class="navbar-buttons d-flex justify-content-end">
+    <!-- /.nav-collapse-->
+    <!-- <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a> -->
+    <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>3 items in cart</span></a></div>
+  </div>
+</nav>
+</div>
+<div id="top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offer mb-3 mb-lg-0"><a href="inventories" class="btn btn-success btn-sm">Offer of the Week</a><a href="#" class="ml-1">Snow Plow Blow Out!</a></div>
+      <div class="col-lg-6 text-center text-lg-right">
+        <ul class="menu list-inline mb-0">
+          <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Why Us?</a></li>
+          <li class="list-inline-item"><a href="contact.html">Contact</a></li>
+          <li class="list-inline-item"><a href="#">Trending Items</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">The world is mud-luscious and puddle wonderful.</h3>
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+
+          <h5>It's better to have a Suzuki Quad than a fancy rug <br><br>
+             And we'll trade escargot for a car in the mud<br><br><br><br>
+             Any day<br><br><br><br>
+             Here for a good time, not a long time <br><br>
+             We like playing in the dirt and grime <br><br><br><br>
+             And it's fine if you like tea and crumpets <br><br>
+             We like playing in trees with no cumpass <br><br><br><br>
+             So if you like to ride dirt bikes and rock climb <br><br>
+             We like to kick it with your kind<br><br><br><br>
+             Any day <br><br><br><br>
+             So you can call us buds<br><br>
+             Here's a beer... Chug.
+           </h5>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
