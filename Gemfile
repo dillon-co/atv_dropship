@@ -22,7 +22,6 @@ gem "sidekiq-cron", "~> 0.4.0"
 gem 'sinatra', :require => nil
 gem 'redis-rails'
 gem 'rails_12factor', group: :production
-gem 'annotate'
 gem 'watir'
 
 group :development, :test do
