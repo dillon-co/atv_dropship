@@ -42,7 +42,7 @@ class Inventory < ApplicationRecord
   acts_as_copy_target
 
   def self.pull_inventory
-    self.delete_all
+    # self.delete_all
     ftp = Net::FTP.new('ftp.rockymountainatv.com', "wc5300816", "jz6HMTaR") # ftp login
     ftp.getbinaryfile("Inventory_TIER_B.csv", "Inventory_TIER_B.csv")
     puts "get ready"
