@@ -42,15 +42,15 @@ class Inventory < ApplicationRecord
   acts_as_copy_target
 
   def self.pull_inventory
-    # self.delete_all
+    self.delete_all
     ftp = Net::FTP.new('ftp.rockymountainatv.com', "wc5300816", "jz6HMTaR") # ftp login
+    puts "logged in"
     ftp.getbinaryfile("Inventory_TIER_B.csv", "Inventory_TIER_B.csv")
-    puts "get ready"
+    puts "Got binary file. get ready"
     self.upload_csv_to_db
   end
 
   def self.upload_csv_to_db
-    #  columns = ["PRODNO", "UPC", "MF_ID", "MSRP", "DEALER_PRICE", "NAME", "QTY_UT", "QTY_KY", "KIT_QTY", "WEIGHT", "DEPTH", "HEIGHT", "WIDTH", "DISCONTINUE", "PICTURE", "BRAND", "COLOR", "SIZE", "ORMD", "NO_EXPORT", "SPECIAL_ORD", "OVERSIZE", "NOTE", "RMATV_PRICE"]
     columns = ["prodno", "upc", "mf_id", "msrp", "dealer_price",
       "name", "qty_ut", "qty_ky", "kit_qty", "weight",
       "depth", "height", "width", "discontinue", "picture",
