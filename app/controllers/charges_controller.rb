@@ -2,10 +2,12 @@ class ChargesController < ApplicationController
   rescue_from Stripe::CardError, with: :catch_exception
   def new
     @order = Order.find(params[:order_id])
+    @order_items = @order.order_items
   end
 
   def create
-    @amount = 49999
+    order = Order.find(params[:order_id])
+    @amount = (order.total * 100).round(2)
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :source  => params[:stripeToken]
@@ -17,9 +19,11 @@ class ChargesController < ApplicationController
       :description => 'Rails Stripe customer',
       :currency    => 'usd'
     )
+    order.update(status: :paid)
+    redirect_to confirm_order_path(Order.find(params[:order_id]))
     rescue Stripe::CardError => e
       flash[:error] = e.message
-      redirect_to new_charge_path
+      redirect_to confirm_order_path(Order.find(params[:order_id]))
   end
 
   private

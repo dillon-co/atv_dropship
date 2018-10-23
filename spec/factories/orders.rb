@@ -13,9 +13,15 @@
 #  tax             :decimal(12, 3)
 #  shipping        :decimal(12, 3)
 #  total           :decimal(12, 3)
-#  order_status_id :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  first_name      :string
+#  last_name       :string
+#  phone           :string
+#  text_deals      :boolean
+#  email           :string
+#  subscribed      :boolean
+#  shipping_method :integer
 #
 
 FactoryBot.define do

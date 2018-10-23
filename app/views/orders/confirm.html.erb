@@ -1,0 +1,143 @@
+<div id="all">
+  <div id="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- breadcrumb-->
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+
+
+            </ol>
+          </nav>
+        </div>
+        <div id="basket" class="col-lg-9">
+          <div class="box">
+            <form method="post" action="checkout1.html">
+              <h1>Order Details</h1>
+              <p class="text-muted">
+                <% if @order_items.count > 1 %>
+                  <%= @order_items.count %> items</p>
+                <% else %>
+                  <%= @order_items.count %> item</p>
+                <% end %>
+
+              <% if @order_items.count > 0 %>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="2">Product</th>
+                        <th>Quantity</th>
+                        <th>Unit price</th>
+                        <th colspan="2">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% @order_items.each do |item| %>
+                      <tr>
+                        <td><a href="#">
+                          <%= image_tag Inventory.find_by(prodno: item.prodno).picture %>
+                        </a></td>
+                        <td><%= link_to item.name, inventory_path(Inventory.find_by(prodno: item.prodno)) %></td>
+                        <td>
+                          <%= item.quantity %>
+                        </td>
+                        <td> <%= item.unit_price %> </td>
+                        <td> <%= item.total_price %> </td>
+                        <td></td>
+                      </tr>
+                      <% end %>
+                      <tr>
+                        <td colspan="5">Sub Total</td>
+                        <td colspan="2"> $<%= current_order.subtotal.round(2) %> </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">Shipping</td>
+                        <td colspan="3"> <strong><%= current_order.shipping %></strong>  </td>
+                        <td colspan="5"> $<%= current_order.shipping_cost.round(2) %> </td>
+                      </tr>
+
+                    </tbody>
+
+                    <tfoot>
+                      <tr>
+                        <th colspan="5">Total</th>
+                        <th colspan="2"> $<%= current_order.total.round(2) %> </th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <h5>Ship To:</h5>
+                  <%= current_order.first_name %>
+                  <%= current_order.last_name %><br>
+                  <%= current_order.street_address %><br>
+                  <%= current_order.city %>, <%= current_order.state %> <%= current_order.zip %>
+                </div>
+                <% else %>
+                  <div class="">
+                    <h1>No Items In Cart</h1>
+                  </div>
+                <% end %>
+              <!-- /.table-responsive-->
+              <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                <div class="left">
+                   <%= link_to "Edit Details", edit_order_path(current_order), class:"btn btn-outline-secondary" %>
+                </div>
+                <div class="left">
+                  <%= link_to "Edit Cart", cart_path, class: "btn btn-outline-primary"  %>
+                </div>
+                  <!-- <a href="/inventories" class="btn btn-outline-secondary Continue shopping</a></div> -->
+                <div class="right">
+                  <%= form_tag charges_path do %>
+                    <article>
+                      <% if flash[:error].present? %>
+                        <div id="error_explanation">
+                          <p><%= flash[:error] %></p>
+                        </div>
+                      <% end %>
+                    </article>
+
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                            data-description="Complete Your Order!"
+                            data-amount=" <%= (@order.total * 100).round(2) %> "
+                            data-locale="auto"></script>
+                  <% end %>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.box-->
+        </div>
+        <!-- /.col-lg-9-->
+        <div class="col-lg-3">
+          <div id="order-summary" class="box">
+            <div class="box-header">
+              <h3 class="mb-0">Order summary</h3>
+            </div>
+            <p class="text-muted">Shipping costs are calculated based on the total weight of your order.</p>
+            <div class="table-responsive">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Order subtotal</td>
+                    <th>$<%= current_order.subtotal %></th>
+                  </tr>
+                  <tr>
+                    <td>Shipping </td>
+                    <th><%= "#{current_order.shipping}: $#{current_order.shipping_cost.round(2)}" %></th>
+                  </tr>
+                  <tr class="total">
+                    <td>Total</td>
+                    <th><%= current_order.total.round(2) %></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- /.col-md-3-->
+      </div>
+    </div>
+  </div>
+</div>

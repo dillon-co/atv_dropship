@@ -1,0 +1,21 @@
+<tbody>
+  <tr>
+    <td><a href="#">
+      <%= image_tag Inventory.find_by(prodno: item.prodno).picture %>
+    </a></td>
+    <%= form_for item, remote: true do |f| %>
+    <td><%= link_to item.name, inventory_path(Inventory.find_by(prodno: item.prodno)) %></td>
+    <td>
+      <%= item.quantity %>
+      <!-- <input type="number" value=" <%#= item.quantity %> " class="form-control"> -->
+
+    </td>
+    <td> <%= item.unit_price %> </td>
+
+    <td> <%= item.total_price %> </td>
+    <% end %>
+
+    <td><%= link_to "Delete", item, { data: { confirm: "Are you sure you wish to delete the product '#{item.name}' from your cart?" }, method: :delete, remote: true, class: "" } %></td>
+    <td></td>
+  </tr>
+</tbody>

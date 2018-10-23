@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="box">
+    <h3><%= @dad_joke.question %></h3>
+    <h2><%= link_to @dad_joke.answer, '#' %></h3>
+    <%= link_to "Add Your Own Joke!", new_dad_joke_path, class:"btn btn-primary" %>
+  </div>
+</div>

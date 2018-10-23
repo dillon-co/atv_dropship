@@ -13,9 +13,15 @@
 #  tax             :decimal(12, 3)
 #  shipping        :decimal(12, 3)
 #  total           :decimal(12, 3)
-#  order_status_id :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  first_name      :string
+#  last_name       :string
+#  phone           :string
+#  text_deals      :boolean
+#  email           :string
+#  subscribed      :boolean
+#  shipping_method :integer
 #
 
 class Order < ApplicationRecord
@@ -26,8 +32,41 @@ class Order < ApplicationRecord
   # before_save :update_subtotal
   # after_create :send_order_to_rmatv_worker
 
+  enum shipping: {
+    "Standard" => 0,
+    "Two Day" => 1,
+    "Next Day" => 2
+  }
+
+  enum order_status: [:pending, :paid]
+
+  # def calculate_shipping
+  #
+  # end
+
   def subtotal
-    order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
+    order_items.collect { |oi| oi.quantity * oi.unit_price  }.sum
+  end
+
+  def total_weight
+    order_items.collect { |oi| Inventory.find_by(prodno: oi.prodno).weight }.sum
+  end
+
+  def shipping_cost(shipping_method=self.shipping)
+    case shipping_method
+    when "Standard" || 0
+      (total_weight * 0.27 )
+    when "Two Day" || 1
+      (total_weight * 0.5 )
+    when "Next Day" || 2
+      (total_weight * 0.82 )
+    else
+      0
+    end
+  end
+
+  def total
+    subtotal + shipping_cost(shipping)
   end
 
   def send_order_to_rmatv_worker

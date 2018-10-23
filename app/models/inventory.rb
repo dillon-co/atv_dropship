@@ -35,6 +35,7 @@
 require "net/ftp"
 require 'mechanize'
 require "inventory_type"
+require 'activerecord-import'
 class Inventory < ApplicationRecord
   #TODO add description column. scrape descriptions from web
 
@@ -75,7 +76,7 @@ class Inventory < ApplicationRecord
       product.msrp > product.dealer_price ? [product.id, product.msrp - product.dealer_price] : [product.id, product.rmatv_price - product.dealer_price]
     end
     sorted_margins = all_margins.sort  {|a,b| b[1] <=> a[1] }
-    puts sorted_margins.first(5)
+    puts sorted_margins.first(30)
   end
 
   def self.scrape_rockymountain_atv
@@ -144,6 +145,40 @@ class Inventory < ApplicationRecord
       size_arr << product_list[k][:sizes]
     end
     size_arr.flatten.compact.uniq!
+  end
+
+  def self.set_descriptions
+    self.where("name LIKE '%Send-It%'").each do |shirt|
+      shirt.update(description: "• Super soft Cotton / Poly \n\n\n• Premium fit")
+    end
+    self.where("name LIKE '%Tusk SubZero Snow Plow Kit, Winch Equipped ATV%'").each do |plow|
+      plow.update(description: "The Tusk SubZero snow plow system is a perfect ATV accessory. Using an All Terrain Vehicle to do your snow removal is a great way to get all season use out of your four wheeler. The Tusk SubZero plow system is a simple to mount and easy to operate aftermarket ATV accessory. When thinking of quality ATV parts and accessories, think Tusk!\n\Kit includes the following:
+        \n-Tusk SubZero Plow Blade.
+        \n-Tusk SubZero Plow Mount.
+        \n-Tusk SubZero Tube Runners.\n\n
+        \n\n• Heavy-duty 11 gauge steel blade.
+        \n\n• Replaceable wear bar.
+        \n\n• Quick change blade angle with 5 different settings.
+        \n\n• Push tube constructed from 1.5 inch square tube for durability.
+        \n\n• Quick release pins are simple and secure.
+        \n\n• Blade measures 16\" from the ground to the top of the blade.
+        \n\n• Must have a winch to raise and lower the plow blade (winch not included in the kit).
+        ")
+    end
+    self.where("name LIKE '%Tusk SubZero Snow Plow Kit, Winch Equipped UTV%'").each do |plow|
+      plow.update(description: "The Tusk SubZero snow plow system is a perfect UTV accessory. Using a Side-X-Side Vehicle to do your snow removal is a great way to get all season use out of your UTV. The Tusk SubZero plow system is a simple to mount and easy to operate aftermarket UTV accessory. When thinking of quality UTV parts and accessories, think Tusk!\n\n • Kit includes the following:
+        \n   -Tusk SubZero Plow Blade.
+        \n   -Tusk SubZero Plow Mount.
+        \n   -Tusk SubZero Tube Runners.
+        \n\n• Heavy-duty 11 gauge steel blade.
+        \n\n• Replaceable wear bar.
+        \n\n• Quick change blade angle with 5 different settings.
+        \n\n• Push tube constructed from 1.5 inch square tube for durability.
+        \n\n• Quick release pins are simple and secure.
+        \n\n• Blade measures 16\" from the ground to the top of the blade.
+        \n\n• Must have a winch to raise and lower the plow blade (winch not included in the kit).
+        ")
+    end
   end
 
 end

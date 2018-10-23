@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Wyatt's Dad Jokes </h1><br>
+  <%= link_to "Add Your Own Joke!", new_dad_joke_path, class:"btn btn-primary" %><br><br>
+  <div class="row">
+    <% @dad_jokes.each do |joke| %>
+    <div class="col-lg-4">
+      <%= link_to dad_joke_path(joke) do %>
+      <div class="box">
+        <h3 style="color:black"><%= joke.question  %></h3>
+        <h2><%= link_to joke.answer, dad_joke_path(joke) %></h3>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

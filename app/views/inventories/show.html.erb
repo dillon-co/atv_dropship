@@ -1,4 +1,75 @@
  <%#= @prod.picture %>
-<%= image_tag @prod.picture %>
-<span>Amount: $<%= @prod.msrp %></span>
-<%= link_to "Order Now", new_order_path(prodno: @prod.prodno ), class: 'btn btn-danger'%>
+
+<div class="container">
+
+  <div class="col-lg-12">
+    <div id="productMain" class="row">
+      <div class="col-md-6">
+        <%= image_tag @prod.picture, class: 'img-fluid', size:'600' %>
+        <div data-slider-id="1" class="owl-carousel shop-detail-carousel">
+          <!-- <div class="item"> <%#= image_tag @prod.picture %> </div> -->
+          <div class="item"> <img src="img/detailbig2.jpg" alt="" class="img-fluid"></div>
+          <div class="item"> <img src="img/detailbig3.jpg" alt="" class="img-fluid"></div>
+        </div>
+        <div class="ribbon sale">
+          <div class="theribbon">SALE</div>
+          <div class="ribbon-background"></div>
+        </div>
+        <!-- /.ribbon-->
+
+        <!-- /.ribbon-->
+      </div>
+      <div class="col-md-6">
+        <div class="box">
+          <h1 class="text-center"> <%= @prod.name %> </h1>
+          <!-- <p class="text-center buttons"><%= link_to "Order Now", new_order_path(prodno: @prod.prodno ), class: 'btn btn-primary'%></p> -->
+            <div class="container">
+              <div class="container">
+                <%= form_for @order_item, remote: true do |f| %>
+                  <% if @prod.name.match("Plow Kit") %>
+                    <h5>Vehicle Year</h5>  <%= f.select :vehicle_year, (1996..2019).to_a, class:"" %><br><br>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h5>Make</h5>
+                          <%= f.text_field :vehicle_make, class:"form-control" %>
+                        </div>
+                        <div class="col-md-6">
+                          <h5>Model</h5>
+                          <%= f.text_field :vehicle_model, class:"form-control" %>
+                        </div>
+                      </div>
+                  <% else %>
+                    <h5>Make</h5>
+                    <%= f.select :size, @sizes, class:"form-control" %>
+                  <% end %>
+                <h4 class="text-right"><span style="color: green"><%= number_to_currency @prod.msrp %></span></h4>
+                <div class="input-group">
+                  <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+                  <div class="input-group-btn">
+                    <%= f.hidden_field :prodno, value: @prod.prodno %>
+                    <%= f.hidden_field :unit_price, value: @prod.msrp %>
+                    <%= f.hidden_field :name, value: @prod.name %>
+
+                    <%= f.submit "Add to Cart", class: "btn btn-primary", id: "add_to_cart_button" %>
+                  </div>
+                </div>
+                <div class="right justify-content-end">
+                  <%= render "layouts/cart_text" %>
+                </div>
+                <% end %>
+
+              </div>
+            </div>
+            <br><br><br>
+            <div class="box">
+              <div class="container">
+                <h3>Details</h3>
+                <pre><p><%= @prod.description.html_safe %></p></pre>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+  </div>
+</div>

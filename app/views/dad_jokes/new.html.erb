@@ -1,0 +1,24 @@
+<%= form_for @dad_joke do |f|%>
+  <div class="box container">
+    <!-- <form method="get" action="checkout2.html"> -->
+      <h1>Add A Joke!</h1>
+      <div class="content py-3">
+        <div class="">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="firstname">Question</label>
+              <%= f.text_field :question, class: "form-control" %>
+            </div>
+          </div>
+          <br>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="lastname">Punch Line</label>
+              <%= f.text_field :answer, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <%= f.submit "Add Laughs", class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>
