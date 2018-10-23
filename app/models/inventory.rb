@@ -35,7 +35,8 @@
 require "net/ftp"
 require 'mechanize'
 require "inventory_type"
-require 'activerecord-import'
+require 'activerecord-import/base'
+require 'activerecord-import/active_record/adapters/postgresql_adapter'
 class Inventory < ApplicationRecord
   #TODO add description column. scrape descriptions from web
 
