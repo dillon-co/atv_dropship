@@ -331,7 +331,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-import (~> 0.27.0)
+  activerecord-import
   annotate
   better_errors
   binding_of_caller
