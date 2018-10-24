@@ -58,8 +58,16 @@ class Inventory < ApplicationRecord
       "depth", "height", "width", "discontinue", "picture",
       "brand", "color", "size", "ormd", "no_export",
       "special_ord", "oversize", "note", "rmatv_price"]
-     values = CSV.read(Rails.root.join('Inventory_TIER_B.csv'))
-     self.import(columns, values, recursive: true)
+     CSV.foreach(Rails.root.join('Inventory_TIER_B.csv')) do |row|
+       i = self.new(prodno: row[0], upc: row[1], mf_id: row[2], msrp: row[3], dealer_price: row[4],
+         name: row[5], qty_ut: row[6], qty_ky: row[7], kit_qty: row[8], weight: row[9],
+         depth: row[10], height: row[11], width: row[12], discontinue: row[13], picture: row[14],
+         brand: row[15], color: row[16], size: row[17], ormd: row[18], no_export: row[19],
+         special_ord: row[20], oversize: row[21], note: row[22], rmatv_price: row[23])
+        i.save 
+     end
+
+    #  self.import(columns, values, recursive: true)
   end
 
   def self.get_margins(prod=nil)
