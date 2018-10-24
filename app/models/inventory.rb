@@ -59,7 +59,7 @@ class Inventory < ApplicationRecord
       "brand", "color", "size", "ormd", "no_export",
       "special_ord", "oversize", "note", "rmatv_price"]
      values = CSV.read(Rails.root.join('Inventory_TIER_B.csv'))
-     self.import columns, values
+     self.import(columns, values, recursive: true)
   end
 
   def self.get_margins(prod=nil)
