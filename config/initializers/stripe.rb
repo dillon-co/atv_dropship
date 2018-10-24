@@ -1,6 +1,9 @@
 Rails.configuration.stripe = {
-  :publishable_key => 'pk_test_jgu0sv7MBfblCOFReUGc17Lo',#ENV['CC1_STRIPE_PUBLISHABLE'],
-  :secret_key      => 'sk_test_tVa65ZCV97nztWuFgfX0NpEC rails s' #ENV['CC1_STRIPE_SECRET']
+  :publishable_key => ENV['CC1_STRIPE_PUBLISHABLE'], #'pk_test_jgu0sv7MBfblCOFReUGc17Lo',
+  :secret_key      => ENV['CC1_STRIPE_SECRET'] #'sk_test_tVa65ZCV97nztWuFgfX0NpEC'
+
+  # :publishable_key =>  'pk_test_jgu0sv7MBfblCOFReUGc17Lo',
+  # :secret_key      => 'sk_test_tVa65ZCV97nztWuFgfX0NpEC'
 }
 # end
 

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get '/about' => 'pages#about', as: :about
 
+  get '/receipt' => 'orders#order_receipt', as: :receipt
+
   get 'orders/confirm' => 'orders#confirm', as: :confirm_order
 
   resources :orders

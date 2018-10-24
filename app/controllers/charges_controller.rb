@@ -6,8 +6,9 @@ class ChargesController < ApplicationController
   end
 
   def create
-    order = Order.find(params[:order_id])
-    @amount = (order.total * 100).round(2)
+    order = current_order
+    @amount = (order.total.round(2) * 100).to_i
+
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :source  => params[:stripeToken]
@@ -16,14 +17,17 @@ class ChargesController < ApplicationController
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => @amount,
-      :description => 'Rails Stripe customer',
+      :description => 'CC1 Motorsports Order',
       :currency    => 'usd'
     )
-    order.update(status: :paid)
-    redirect_to confirm_order_path(Order.find(params[:order_id]))
+    order.update(order_status: :paid)
+    current_order = Order.new
+
+    redirect_to receipt_path(order_id: order.id)
+
     rescue Stripe::CardError => e
       flash[:error] = e.message
-      redirect_to confirm_order_path(Order.find(params[:order_id]))
+      redirect_to confirm_order_path(order)
   end
 
   private

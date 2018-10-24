@@ -19,16 +19,27 @@ class OrdersController < ApplicationController
     end
   end
 
+  def order_receipt
+    @order = Order.find(params[:order_id])
+    @order_items = @order.order_items
+  end
+
   def edit
-    @order = current_order
+    @order = Order.find(params[:id])
   end
 
   def update
-    current_order.update_attributes(order_params)
-    if current_order.save
-      redirect_to confirm_order_path(order_id: current_order.id)
+    @order = Order.find(params[:id])
+    @order.update_attributes(order_params)
+    if @order.save
+      if @order.order_status == :pending
+        redirect_to confirm_order_path(order_id: @order.id)
+      else
+        redirect_to receipt_path(order_id: @order.id)
+      end
     end
   end
+
   private
 
   def order_params

@@ -14,7 +14,7 @@
         <div id="basket" class="col-lg-9">
           <div class="box">
             <!-- <form method="post" action="checkout1.html"> -->
-              <h1>Order Details</h1>
+              <h1>Order Confirmed!</h1>
               <p class="text-muted">
                 <% if @order_items.count > 1 %>
                   <%= @order_items.count %> items</p>
@@ -57,9 +57,7 @@
                         <td colspan="3"> <strong><%= @order.shipping %></strong>  </td>
                         <td colspan="5"> $<%= @order.shipping_cost.round(2) %> </td>
                       </tr>
-
                     </tbody>
-
                     <tfoot>
                       <tr>
                         <th colspan="5">Total</th>
@@ -81,34 +79,18 @@
               <!-- /.table-responsive-->
               <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
                 <div class="left">
-                   <%= link_to "Edit Details", edit_order_path(@order), class:"btn btn-outline-secondary" %>
+                   <%= link_to "Edit Address", edit_order_path(@order), class:"btn btn-outline-secondary" %>
                 </div>
                 <div class="left">
-                  <%= link_to "Edit Cart", cart_path, class: "btn btn-outline-primary"  %>
                 </div>
                   <!-- <a href="/inventories" class="btn btn-outline-secondary Continue shopping</a></div> -->
                 <div class="right">
-                  <%= form_tag charges_path do %>
-                    <article>
-                      <% if flash[:error].present? %>
-                        <div id="error_explanation">
-                          <p><%= flash[:error] %></p>
-                        </div>
-                      <% end %>
-                    </article>
-                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                            data-description="Complete Your Order!"
-                            data-amount=" <%= (@order.total.round(2) * 100) %> "
-                            data-locale="auto"></script>
-                  <% end %>
                 </div>
               </div>
             <!-- </form> -->
           </div>
           <!-- /.box-->
         </div>
-
         <!-- /.col-lg-9-->
         <div class="col-lg-3">
           <div id="order-summary" class="box">
