@@ -63,8 +63,10 @@
             <br><br><br>
             <div class="box">
               <div class="container">
-                <h3>Details</h3>
-                <pre><p><%= @prod.description.html_safe %></p></pre>
+                <% if @prod.description.present? %>
+                  <h3>Details</h3>
+                  <pre><p><%= @prod.description.html_safe %></p></pre>
+                <% end %>  
               </div>
             </div>
         </div>
