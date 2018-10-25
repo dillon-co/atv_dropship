@@ -23,6 +23,8 @@ gem 'sinatra', :require => nil
 gem 'redis-rails'
 gem 'rails_12factor', group: :production
 gem 'watir'
+gem 'groupdate'
+gem "chartkick"
 
 group :development, :test do
   gem 'byebug', platform: :mri

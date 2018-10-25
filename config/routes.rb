@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
+  devise_for :admins
   get 'order_items/create'
 
   get 'order_items/update'
 
   get 'order_items/destroy'
+
+  get 'admin_dashboard/orders' => 'admin_dashboard#orders', as: :order_review
 
   # resource :cart, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]

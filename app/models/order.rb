@@ -40,6 +40,18 @@ class Order < ApplicationRecord
 
   enum order_status: [:pending, :paid]
 
+
+
+  def profit
+    all_items_with_details = order_items.map do |item|
+      Inventory.find_by(prodno: item.prodno)
+    end
+    Inventory.get_margins(all_items_with_details).sum
+  end
+
+  def self.total_profit
+    where(order_status: :paid).map {|o| o.profit}.sum
+  end
   # def calculate_shipping
   #
   # end

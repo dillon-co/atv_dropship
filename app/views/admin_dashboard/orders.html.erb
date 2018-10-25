@@ -1,0 +1,19 @@
+<br>
+<div class="container">
+  <h1> <%= @orders.count %> Sales</h1>
+  <h3> $<%= @total_profit %> Profit </h3>
+  <div class="row jumbotron">
+    <% @orders.each do  |order| %>
+      <div class="col-md-4">
+        <div class="box">
+          <h2> $<%= order.profit %> Profit </h2>
+          <% order.order_items.each do |item| %>
+              <h4><%= item.name %></h4>
+              <p class="right"> <%= item.unit_price %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= line_chart Order.group_by_day(:created_at).count %>
+</div>

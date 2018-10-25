@@ -5,7 +5,7 @@ class InventoriesController < ApplicationController
     # if params == ""
     # @snow_plows = Inventory.get_all("Plow Kit")
     @snow_plows = Inventory.get_all("Plow Kit")
-    @shirts = Inventory.get_all("Send-It")
+    @shirts = Inventory.get_all("Shirt")
 
 
 

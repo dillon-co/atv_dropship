@@ -64,19 +64,23 @@ class Inventory < ApplicationRecord
          depth: row[10], height: row[11], width: row[12], discontinue: row[13], picture: row[14],
          brand: row[15], color: row[16], size: row[17], ormd: row[18], no_export: row[19],
          special_ord: row[20], oversize: row[21], note: row[22], rmatv_price: row[23])
-        i.save 
+        i.save
      end
 
     #  self.import(columns, values, recursive: true)
   end
 
-  def self.get_margins(prod=nil)
+  def self.get_average_margins(prod=nil)
     prod ? all_products = self.where('name LIKE ?', "%#{prod}%") : all_products = self.all
-    all_margins = all_products.map do |product|
-      product.msrp > product.dealer_price ? product.msrp - product.dealer_price : product.rmatv_price - product.dealer_price
-    end
+    all_margins = self.get_margins(all_products)
     average_margins = all_margins.inject(&:+)/self.count
     puts "Average margin per product is $#{average_margins.round(2)}"
+  end
+
+  def self.get_margins(all_products=self.all)
+    all_products.map do |product|
+      product.msrp > product.dealer_price ? product.msrp - product.dealer_price : product.rmatv_price - product.dealer_price
+    end
   end
 
   def self.sort_by_margins(prod=nil)
