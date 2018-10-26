@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-6">
         <div class="box">
-          <h1 class="text-center"> <%= @prod.name %> </h1>
+          <h1 class="text-center"> <%= @prod.name.split(/Small|Medium|Large|X-Large|XX-Large/).first %> </h1>
           <!-- <p class="text-center buttons"><%= link_to "Order Now", new_order_path(prodno: @prod.prodno ), class: 'btn btn-primary'%></p> -->
             <div class="container">
               <div class="container">
@@ -39,8 +39,10 @@
                         </div>
                       </div>
                   <% else %>
-                    <h5>Make</h5>
+                    <h5>Size</h5>
                     <%= f.select :size, @sizes, class:"form-control" %>
+                    <h5>Color</h5>
+                    <%= f.select :color, params[:colors], class:"form-control" %>
                   <% end %>
                 <h4 class="text-right"><span style="color: green"><%= number_to_currency @prod.msrp %></span></h4>
                 <div class="input-group">
@@ -48,8 +50,7 @@
                   <div class="input-group-btn">
                     <%= f.hidden_field :prodno, value: @prod.prodno %>
                     <%= f.hidden_field :unit_price, value: @prod.msrp %>
-                    <%= f.hidden_field :name, value: @prod.name %>
-
+                    <%= f.hidden_field :name, value: @prod.name.split(/Small|Medium|Large|X-Large|XX-Large/).first %>
                     <%= f.submit "Add to Cart", class: "btn btn-primary", id: "add_to_cart_button" %>
                   </div>
                 </div>
@@ -57,7 +58,6 @@
                   <%= render "layouts/cart_text" %>
                 </div>
                 <% end %>
-
               </div>
             </div>
             <br><br><br>
@@ -66,7 +66,7 @@
                 <% if @prod.description.present? %>
                   <h3>Details</h3>
                   <pre><p><%= @prod.description.html_safe %></p></pre>
-                <% end %>  
+                <% end %>
               </div>
             </div>
         </div>

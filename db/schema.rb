@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181025065409) do
+ActiveRecord::Schema.define(version: 20181026003431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20181025065409) do
     t.integer  "vehicle_year"
     t.string   "vehicle_make"
     t.string   "vehicle_model"
+    t.string   "color"
     t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
   end
 

@@ -133,14 +133,22 @@ class Inventory < ApplicationRecord
   end
 
   def self.get_all(product_query)
-    queried_products = self.where("name LIKE ?", "%#{product_query}%")
+    queried_products = self.where("name LIKE ? AND picture IS NOT NULL", "%#{product_query}%")
     puts queried_products.count
     p_hash= {}
     queried_products.each do |prod|
-      p_hash[prod.name] ||= {sizes: [], ids: []}
+      if product_query == "Shirt"
+        prod_name, color = prod.name.split(/Small|Medium|Large|X-Large|XX-Large/)
+        p_hash[prod_name] ||= {sizes: [], ids: [], colors:[]}
+        p_hash[prod_name][:colors].append(color) unless p_hash[prod_name][:colors].include?(color)
+      else
+        prod_name = prod.name
+        p_hash[prod.name] ||= {sizes: [], ids: [], colors:[]}
+      end
 
-      p_obj = p_hash[prod.name]
-      p_obj[:sizes].append(prod.size)
+      p_obj = p_hash[prod_name]
+      p_obj[:sizes].append(prod.size) unless p_obj[:sizes].include?(prod.size)
+
       p_obj[:ids].append(prod.id)
       p_obj[:dealer_price], p_obj[:msrp], p_obj[:rmatv_price] = prod.dealer_price, prod.msrp,prod.rmatv_price
       p_obj[:brand], p_obj[:picture], prod[:id] = prod.brand, prod.picture, prod.id
@@ -178,6 +186,7 @@ class Inventory < ApplicationRecord
         \n\n• Must have a winch to raise and lower the plow blade (winch not included in the kit).
         ")
     end
+    
     self.where("name LIKE '%Tusk SubZero Snow Plow Kit, Winch Equipped UTV%'").each do |plow|
       plow.update(description: "The Tusk SubZero snow plow system is a perfect UTV accessory. Using a Side-X-Side Vehicle to do your snow removal is a great way to get all season use out of your UTV. The Tusk SubZero plow system is a simple to mount and easy to operate aftermarket UTV accessory. When thinking of quality UTV parts and accessories, think Tusk!\n\n • Kit includes the following:
         \n   -Tusk SubZero Plow Blade.

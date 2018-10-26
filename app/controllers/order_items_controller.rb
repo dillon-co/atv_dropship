@@ -16,6 +16,7 @@ class OrderItemsController < ApplicationController
     @order_item = @order.order_items.find(params[:id])
     @order_item.update_attributes(order_item_params)
     @order_items = @order.order_items
+    # @colors = params[:colors]
   end
 
   def destroy
@@ -30,6 +31,6 @@ class OrderItemsController < ApplicationController
 
 private
   def order_item_params
-    params.require(:order_item).permit(:quantity, :product_id, :unit_price, :prodno, :name, :size, :vehicle_type, :vehicle_year, :vehicle_make, :vehicle_model)
+    params.require(:order_item).permit(:quantity, :product_id, :unit_price, :prodno, :name, :size, :color, :vehicle_type, :vehicle_year, :vehicle_make, :vehicle_model)
   end
 end
