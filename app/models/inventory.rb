@@ -2,34 +2,35 @@
 #
 # Table name: inventories
 #
-#  id           :integer          not null, primary key
-#  prodno       :integer
-#  upc          :integer
-#  mf_id        :string
-#  msrp         :float
-#  dealer_price :float
-#  name         :string
-#  qty_ut       :string
-#  qty_ky       :integer
-#  kit_qty      :string
-#  weight       :float
-#  depth        :float
-#  height       :float
-#  width        :float
-#  discontinue  :string
-#  picture      :string
-#  brand        :string
-#  color        :string
-#  size         :string
-#  ormd         :boolean
-#  no_export    :boolean
-#  special_ord  :boolean
-#  oversize     :boolean
-#  note         :text
-#  rmatv_price  :float
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  description  :text
+#  id                  :integer          not null, primary key
+#  prodno              :integer
+#  upc                 :integer
+#  mf_id               :string
+#  msrp                :float
+#  dealer_price        :float
+#  name                :string
+#  qty_ut              :string
+#  qty_ky              :integer
+#  kit_qty             :string
+#  weight              :float
+#  depth               :float
+#  height              :float
+#  width               :float
+#  discontinue         :string
+#  picture             :string
+#  brand               :string
+#  color               :string
+#  size                :string
+#  ormd                :boolean
+#  no_export           :boolean
+#  special_ord         :boolean
+#  oversize            :boolean
+#  note                :text
+#  rmatv_price         :float
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  description         :text
+#  product_category_id :integer
 #
 
 require "net/ftp"
@@ -49,24 +50,25 @@ class Inventory < ApplicationRecord
     puts "logged in"
     ftp.getbinaryfile("Inventory_TIER_B.csv", "Inventory_TIER_B.csv")
     puts "Got binary file. get ready"
-    self.upload_csv_to_db
+    self.update_database
   end
 
-  def self.upload_csv_to_db
+  def self.update_database
     columns = ["prodno", "upc", "mf_id", "msrp", "dealer_price",
       "name", "qty_ut", "qty_ky", "kit_qty", "weight",
       "depth", "height", "width", "discontinue", "picture",
       "brand", "color", "size", "ormd", "no_export",
       "special_ord", "oversize", "note", "rmatv_price"]
      CSV.foreach(Rails.root.join('Inventory_TIER_B.csv')) do |row|
-       i = self.new(prodno: row[0], upc: row[1], mf_id: row[2], msrp: row[3], dealer_price: row[4],
+       i = self.find_or_create_by(prodno: row[0])
+
+       i.update(upc: row[1], mf_id: row[2], msrp: row[3], dealer_price: row[4],
          name: row[5], qty_ut: row[6], qty_ky: row[7], kit_qty: row[8], weight: row[9],
          depth: row[10], height: row[11], width: row[12], discontinue: row[13], picture: row[14],
          brand: row[15], color: row[16], size: row[17], ormd: row[18], no_export: row[19],
          special_ord: row[20], oversize: row[21], note: row[22], rmatv_price: row[23])
         i.save
      end
-
     #  self.import(columns, values, recursive: true)
   end
 
@@ -89,7 +91,7 @@ class Inventory < ApplicationRecord
       product.msrp > product.dealer_price ? [product.id, product.msrp - product.dealer_price] : [product.id, product.rmatv_price - product.dealer_price]
     end
     sorted_margins = all_margins.sort  {|a,b| b[1] <=> a[1] }
-    puts sorted_margins.first(30)
+    puts sorted_margins.first(5000)
   end
 
   def self.scrape_rockymountain_atv
@@ -186,7 +188,7 @@ class Inventory < ApplicationRecord
         \n\n• Must have a winch to raise and lower the plow blade (winch not included in the kit).
         ")
     end
-    
+
     self.where("name LIKE '%Tusk SubZero Snow Plow Kit, Winch Equipped UTV%'").each do |plow|
       plow.update(description: "The Tusk SubZero snow plow system is a perfect UTV accessory. Using a Side-X-Side Vehicle to do your snow removal is a great way to get all season use out of your UTV. The Tusk SubZero plow system is a simple to mount and easy to operate aftermarket UTV accessory. When thinking of quality UTV parts and accessories, think Tusk!\n\n • Kit includes the following:
         \n   -Tusk SubZero Plow Blade.

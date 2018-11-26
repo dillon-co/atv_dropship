@@ -16,6 +16,7 @@
 #  vehicle_year  :integer
 #  vehicle_make  :string
 #  vehicle_model :string
+#  color         :string
 #
 
 class OrderItem < ApplicationRecord

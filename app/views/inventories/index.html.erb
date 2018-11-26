@@ -1,6 +1,6 @@
-<div class="container">
+<!-- <div class="container"> -->
 
-  <div class="col-lg-12">
+  <!-- <div class="col-lg-12"> -->
     <div class="box">
       <h1>Snow Plows</h1>
       <!-- <p>In our Ladies department we offer wide selection of the best products we have found and carefully selected worldwide.</p> -->
@@ -77,7 +77,7 @@
                         <div class="text">
                           <h3> <%= link_to k, inventory_path(@shirts[k][:ids].first) %> </h3>
                           <p class="price">
-                            <del></del> $<%= @shirts[k][:msrp] %>
+                            <del></del> $<%= @shirts[k][:msrp] > 0 ? @shirts[k][:msrp] : @shirts[k][:rmatv_price] %>
                           </p>
                           <p class="buttons"><%= link_to "View", inventory_path(@shirts[k][:ids].first, colors: @shirts[k][:colors]), class:'btn btn-outline-secondary' %></p>
                         </div>

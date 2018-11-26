@@ -44,12 +44,21 @@
                     <h5>Color</h5>
                     <%= f.select :color, params[:colors], class:"form-control" %>
                   <% end %>
-                <h4 class="text-right"><span style="color: green"><%= number_to_currency @prod.msrp %></span></h4>
+                  <% if @prod.msrp > 0 %>
+                    <h4 class="text-right"><span style="color: green"><%= number_to_currency @prod.msrp %></span></h4>
+                  <% else %>
+                    <h4 class="text-right"><span style="color: green"><%= number_to_currency @prod.rmatv_price %></span></h4>
+                  <% end %>
+
                 <div class="input-group">
                   <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
                   <div class="input-group-btn">
                     <%= f.hidden_field :prodno, value: @prod.prodno %>
-                    <%= f.hidden_field :unit_price, value: @prod.msrp %>
+                    <% if @prod.msrp > 0 %>
+                      <%= f.hidden_field :unit_price, value: @prod.msrp %>
+                    <% else %>
+                      <%= f.hidden_field :unit_price, value: @prod.rmatv_price %>
+                    <% end %>
                     <%= f.hidden_field :name, value: @prod.name.split(/Small|Medium|Large|X-Large|XX-Large/).first %>
                     <%= f.submit "Add to Cart", class: "btn btn-primary", id: "add_to_cart_button" %>
                   </div>

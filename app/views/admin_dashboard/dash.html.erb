@@ -1,0 +1,43 @@
+<br>
+<div class="container">
+  <h1> <%= @orders.count %> Sales</h1>
+  <h3> $<%= @total_profit %> Profit </h3>
+  <div class="row jumbotron">
+    <% @orders.each do  |order| %>
+      <div class="col-md-4">
+        <div class="box">
+          <h2> $<%= order.profit %> Profit </h2>
+          <% order.order_items.each do |item| %>
+              <h4><%= item.name %></h4>
+              <p class="right"> <%= item.unit_price %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= line_chart Order.group_by_day(:created_at).count %>
+
+  <hr>
+  <div class="row">
+    <div class="col-md-4">
+      <h1>Products Being Sold</h1>
+    </div>
+    <div class="col-md-2">
+      <%= link_to "Add Products", new_product_category_path, class:"btn btn-primary" %>
+
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <% @selling_categories.each do |p_c| %>
+      <div class="col-md-4">
+        <div class="card">
+            <h1><%= link_to p_c.name, product_category_path(p_c) %></h1>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+
+
+</div>

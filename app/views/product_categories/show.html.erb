@@ -1,0 +1,26 @@
+<div class="contiainer">
+  <h1> <%= @cat.name.titleize %> </h1>
+</div>
+<div class="row products">
+  <% @category_inventory.keys.each do |k|%>
+    <div class="col-lg-4 col-md-6">
+      <div class="product">
+        <div class="flip-container">
+          <div class="flipper">
+            <div class=""><a href="detail.html"><%= image_tag "#{@category_inventory[k][:picture]}", class:'img-fluid' %></a></div>
+            <!-- <div class="back"><a href="detail.html"><img src="img/product1_2.jpg" alt="" class="img-fluid"></a></div> -->
+          </div>
+        </div><a href="detail.html" class="invisible"></a>
+        <div class="text">
+          <h3> <%= link_to k, inventory_path(@category_inventory[k][:ids].first) %> </h3>
+          <p class="price">
+            <del></del> $<%= @category_inventory[k][:msrp] %>0
+          </p>
+          <p class="buttons"> <%= link_to "View", inventory_path(@category_inventory[k][:ids].first), class:'btn btn-outline-secondary' %> </p>
+        </div>
+        <!-- /.text-->
+      </div>
+      <!-- /.product            -->
+    </div>
+  <% end %>
+</div>

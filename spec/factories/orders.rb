@@ -22,6 +22,7 @@
 #  email           :string
 #  subscribed      :boolean
 #  shipping_method :integer
+#  order_status    :integer          default("pending")
 #
 
 FactoryBot.define do
